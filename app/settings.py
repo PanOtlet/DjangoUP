@@ -3,7 +3,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ['SECRET_KEY']
-DEBUG = DEBUG = os.environ['DEBUG'] == '1'
+DEBUG = os.environ['DEBUG'] == '1'
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -14,12 +14,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'debug_toolbar',
+    'meta',
     'service',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -49,17 +52,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+        'ENGINE':   os.environ['DB_ENGINE'],
+        'NAME':     os.environ['DB_NAME'],
+        'USER':     os.environ['DB_USER'],
+        'HOST':     os.environ['DB_HOST'],
+        'PASSWORD': os.environ['DB_PASS'],
+        'PORT':     os.environ['DB_PORT'],
     }
 }
 
@@ -89,7 +92,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -98,7 +100,6 @@ TIME_ZONE = 'Europe/Warsaw'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -135,6 +136,41 @@ LOGGING = {
     },
 }
 
+# Cache
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+#     }
+# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# Session
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+# Meta datas
+META = {
+    'title': "CoffeePenguin Example App",
+    'description': 'Example Django App',
+    'keywords': [
+        'coffeepenguin'
+    ]
+}
+
+# Debug Toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+}
+
+# Production options
 if not DEBUG:
     #     SECURE_HSTS_SECONDS = True
     #     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -147,12 +183,3 @@ if not DEBUG:
 #     SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     X_FRAME_OPTIONS = 'DENY'
-
-# Meta datas
-META = {
-    'title': "CoffeePenguin Example App",
-    'description': 'Example Django App',
-    'keywords': [
-        'coffeepenguin'
-    ]
-}
