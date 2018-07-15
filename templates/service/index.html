@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <main role="main" class="container">
+    <main role="main" id="main" class="container">
         <h1 class="mt-5">DjangoUP</h1>
         <p class="lead">Perfect and quickest Django App skeleton!</p>
         <p>Visit <a href="https://coffeepenguin.com">authors</a> website for free support!</p>
     </main>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        #main {
+            text-align: center;
+        }
+    </style>
 {% endblock %}
