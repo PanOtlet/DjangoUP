@@ -46,7 +46,7 @@ It's Rolling Release :) It's never had any version.
 
 * **Paweł "Otlet" Otlewski** - *Initial work* - [otlet](https://github.com/otlet)
 
-See also the list of [contributors](CONTRIBUTIORS.MD) who participated in this project.
+See also the list of [contributors](CONTRIBUTORS.MD) who participated in this project.
 
 ## License
 

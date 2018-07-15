@@ -3,6 +3,10 @@ version: '3'
 services:
   db:
     image: postgres
+  redis:
+    image: redis
+    entrypoint: redis-server --appendonly yes
+    restart: always
   web:
     build: .
     command: bash -c "pipenv sync && pipenv run python manage.py makemigrations && pipenv run python manage.py migrate && pipenv run python manage.py runserver 0.0.0.0:8000"
@@ -12,3 +16,4 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
