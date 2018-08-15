@@ -1,4 +1,4 @@
-# DjangoUP
+# DjangoUP [![CodeFactor](https://www.codefactor.io/repository/github/otlet/djangoup/badge)](https://www.codefactor.io/repository/github/otlet/djangoup)
 
 Kickstart to make Django based project with PostgreSQL, Redis, SEO and easy debug support.
 
