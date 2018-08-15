@@ -28,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
-
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', include('service.urls'), name='service'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
