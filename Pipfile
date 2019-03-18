@@ -10,7 +10,7 @@ django-meta = "==1.4.1"
 django-debug-toolbar = "==1.11"
 django-redis = "==4.10.0"
 pytz = "==2018.9"
-redis = "==3.2.0"
+redis = "==3.2.1"
 sqlparse = "==0.3.0"
 
 [requires]
