@@ -4,7 +4,7 @@ name = "pypi"
 url = "https://pypi.python.org/simple"
 
 [packages]
-django = "==2.2.4"
+django = "==2.2.10"
 psycopg2-binary = "==2.8.3"
 django-meta = "==1.5.2"
 django-debug-toolbar = "==2.0"
